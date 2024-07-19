@@ -122,7 +122,6 @@ declare namespace OAuth {
 		verification_level: number;
 		default_message_notifications: number;
 		explicit_content_filter: number;
-		explicit_content_filter: number;
 		roles: Role[];
 		emojis: Emoji[];
 		features: string[];
@@ -142,6 +141,10 @@ declare namespace OAuth {
 		public_updates_channel_id: string | null;
 		max_video_channel_users?: number;
 		max_stage_video_channel_users?: number;
+		nsfw?: boolean | null | undefined;
+		nsfw_level: number;
+		stickers?: Sticker[];
+		premium_progress_bar_enabled: boolean;
 		safety_alerts_channel_id: string | null;
 	}
 
@@ -157,6 +160,7 @@ declare namespace OAuth {
 		managed: boolean;
 		mentionable: boolean;
 		flags: number;
+		tags?: RoleTags;
 	}
 
 	export interface Emoji {
@@ -168,6 +172,26 @@ declare namespace OAuth {
 		managed?: boolean;
 		animated?: boolean;
 		available?: boolean;
+	}
+
+	export interface Sticker {
+		id: string;
+		name: string;
+		description: string | null;
+		tags: string;
+		type: number;
+		format_type: number;
+		available?: boolean;
+		guild_id: string;
+	}
+
+	export interface RoleTags {
+		bot_id?: string;
+		integration_id?: string;
+		premium_subscriber?: null;
+		subscription_listing_id?: string;
+		available_for_purchase?: null;
+		guild_connections?: null;
 	}
 
 	export interface HTTPResponse {
