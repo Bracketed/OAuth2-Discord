@@ -228,6 +228,89 @@ oauth.getUserConnections(access_token).then(console.log);
 */
 ```
 
+### `getUserRoleConnection(access_token, client_id)`
+
+`access_token`: The user's access token.
+
+`client_id`: Your application's client id. Can be omitted if provided on the client constructor.
+
+Requires the `role_connections.write` OAuth2 scope.
+
+Returns the [application role connection](https://discord.com/developers/docs/resources/user#application-role-connection-object) object for the user.
+
+```js
+const DiscordOauth2 = require("discord-oauth2");
+const oauth = new DiscordOauth2({
+	clientId: "332269999912132097",
+});
+
+const access_token = "6qrZcUqja7812RVdnEKjpzOL4CvHBFG";
+
+oauth.getUserRoleConnection(access_token).then(console.log);
+/*
+	{
+		platform_name: 'Example Linked Role Discord Bot',
+		platform_username: null,
+		metadata: {
+			cookieseaten: '1483',
+			allergictonuts: '0',
+			firstcookiebaked: '2003-12-20'
+		}
+	}
+*/
+```
+
+### `updateUserRoleConnection(object)`
+
+Update the application role connection for the user.
+
+Takes an object with the following properties (required):
+
+`accessToken`: The user access token.
+
+Optional:
+
+`platformName`: The vanity name of the platform the bot has connected.
+
+`platformUsername`: The username on the platform the bot has connected.
+
+`metadata`: Object mapping [application role connection metadata](https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object) keys to their string-ified value for the user on the platform the bot has connected.
+
+`clientId`: Your application's client id. Can be omitted if provided on the client constructor.
+
+Requires the `role_connections.write` OAuth2 scope.
+
+Returns the [application role connection](https://discord.com/developers/docs/resources/user#application-role-connection-object) object for the user.
+
+```js
+const DiscordOauth2 = require("discord-oauth2");
+const oauth = new DiscordOauth2({
+	clientId: "332269999912132097",
+});
+
+oauth.updateUserRoleConnection({
+	accessToken: "6qrZcUqja7812RVdnEKjpzOL4CvHBFG",
+	platformName: "Example Linked Role Discord Bot",
+	platformUsername: "Example Username",
+	metadata: {
+		cookieseaten: "1483",
+		allergictonuts: "0",
+		firstcookiebaked: "2003-12-20",
+	},
+}).then(console.log);
+/*
+	{
+		platform_name: 'Example Linked Role Discord Bot',
+		platform_username: 'Example Username',
+		metadata: {
+			cookieseaten: '1483',
+			allergictonuts: '0',
+			firstcookiebaked: '2003-12-20'
+		}
+	}
+*/
+```
+
 ### `addMember(object)`
 
 Force join a user to a guild.

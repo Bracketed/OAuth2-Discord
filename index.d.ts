@@ -75,6 +75,14 @@ declare namespace OAuth {
 		bot?: User;
 	}
 
+	export interface RoleConnection {
+		platform_name: string | null;
+		platform_username: string | null;
+		metadata: {
+			[key: string]: string;
+		};
+	}
+
 	export interface TokenRequestResult {
 		access_token: string;
 		token_type: string;
@@ -175,6 +183,16 @@ declare class OAuth extends EventEmitter {
 		withCounts?: boolean;
 	}): Promise<OAuth.PartialGuild[]>;
 	getUserConnections(access_token: string): Promise<OAuth.Connection[]>;
+	getUserRoleConnection(access_token: string, client_id?: string): Promise<OAuth.RoleConnection>;
+	updateUserRoleConnection(opts: {
+		platformName?: string;
+		platformUsername?: string;
+		metadata?: {
+			[key: string]: string;
+		};
+		accessToken: string;
+		clientId?: string;
+	}): Promise<OAuth.RoleConnection>;
 	addMember(opts: {
 		deaf?: boolean;
 		mute?: boolean;
